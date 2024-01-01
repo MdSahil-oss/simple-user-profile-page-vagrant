@@ -18,28 +18,29 @@ pipeline {
           '''
       }
     }
-    stage('SSHing into VM') {
+    stage('SSHing into VM & Executing script') {
       steps{
         sh '''#!/bin/bash
-              ssh -o StrictHostKeyChecking=no -i ${private_key} vagrant@${vm_ip}
-              cd ~/app/
+              ssh -o StrictHostKeyChecking=no -i ${private_key} vagrant@${vm_ip} "rm -fR ~/app/node_modules"
+              ssh -o StrictHostKeyChecking=no -i ${private_key} vagrant@${vm_ip} "npm install ~/app/"
+              ssh -o StrictHostKeyChecking=no -i ${private_key} vagrant@${vm_ip} "npm start ~/app/"
           '''
       }
     }
-    stage('Installing dependencies') {
-      steps{
-        sh '''#!/bin/bash
-              rm -fR node_modules
-              npm install
-          '''
-      }
-    }
-    stage('Starting Application') {
-      steps{
-        sh '''#!/bin/bash
-              npm start >> logs.txt & && exit
-          '''
-      }
-    }
+    // stage('Installing dependencies') {
+    //   steps{
+    //     sh '''#!/bin/bash
+    //           rm -fR node_modules
+    //           npm install
+    //       '''
+    //   }
+    // }
+    // stage('Starting Application') {
+    //   steps{
+    //     sh '''#!/bin/bash
+    //           npm start >> logs.txt & && exit
+    //       '''
+    //   }
+    // }
   }
 }
