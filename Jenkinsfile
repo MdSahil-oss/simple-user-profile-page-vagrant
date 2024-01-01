@@ -11,17 +11,17 @@ pipeline {
               echo "private_key: ${private_key}"
               echo "vm_ip: ${vm_ip}"
               cat ${private_key}
-              # scp -i ${private_key} -r ./public vagrant@${vm_ip}:/home/vagrant/app/
-              # scp -i ${private_key} ./index.js vagrant@${vm_ip}:/home/vagrant/app/
-              # scp -i ${private_key} -r ./package.json vagrant@${vm_ip}:/home/vagrant/app/
-              # scp -i ${private_key} ./.env vagrant@${vm_ip}:/home/vagrant/app/
+              scp -o StrictHostKeyChecking=no -i ${private_key} -r ./public vagrant@${vm_ip}:/home/vagrant/app/
+              scp -o StrictHostKeyChecking=no -i ${private_key} ./index.js vagrant@${vm_ip}:/home/vagrant/app/
+              scp -o StrictHostKeyChecking=no -i ${private_key} -r ./package.json vagrant@${vm_ip}:/home/vagrant/app/
+              scp -o StrictHostKeyChecking=no -i ${private_key} ./.env vagrant@${vm_ip}:/home/vagrant/app/
           '''
       }
     }
     stage('SSHing into VM') {
       steps{
         sh '''#!/bin/bash
-              ssh -i ${private_key} vagrant@${vm_ip}
+              ssh -o StrictHostKeyChecking=no -i ${private_key} vagrant@${vm_ip}
               cd ~/app/
           '''
       }
