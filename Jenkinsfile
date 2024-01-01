@@ -22,8 +22,8 @@ pipeline {
       steps{
         sh '''#!/bin/bash
               ssh -o StrictHostKeyChecking=no -i ${private_key} vagrant@${vm_ip} "rm -fR ~/app/node_modules"
-              ssh -o StrictHostKeyChecking=no -i ${private_key} vagrant@${vm_ip} "npm install ~/app/"
-              ssh -o StrictHostKeyChecking=no -i ${private_key} vagrant@${vm_ip} "npm start ~/app/"
+              ssh -o StrictHostKeyChecking=no -i ${private_key} vagrant@${vm_ip} "cd ~/app/ && npm install"
+              ssh -o StrictHostKeyChecking=no -i ${private_key} vagrant@${vm_ip} "cd ~/app/ && npm start"
           '''
       }
     }
