@@ -11,10 +11,10 @@ pipeline {
               echo "private_key: ${private_key}"
               echo "vm_ip: ${vm_ip}"
               cat ${private_key}
-              scp -i ${private_key} -r ./public vagrant@${vm_ip}:/home/vagrant/app/
-              scp -i ${private_key} ./index.js vagrant@${vm_ip}:/home/vagrant/app/
-              scp -i ${private_key} -r ./package.json vagrant@${vm_ip}:/home/vagrant/app/
-              scp -i ${private_key} ./.env vagrant@${vm_ip}:/home/vagrant/app/
+              # scp -i ${private_key} -r ./public vagrant@${vm_ip}:/home/vagrant/app/
+              # scp -i ${private_key} ./index.js vagrant@${vm_ip}:/home/vagrant/app/
+              # scp -i ${private_key} -r ./package.json vagrant@${vm_ip}:/home/vagrant/app/
+              # scp -i ${private_key} ./.env vagrant@${vm_ip}:/home/vagrant/app/
           '''
       }
     }
