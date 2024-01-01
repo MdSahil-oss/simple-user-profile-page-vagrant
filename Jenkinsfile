@@ -1,7 +1,7 @@
 pipeline {
   environment {
     vm_ip = "192.168.56.10"
-    private_key = 'VagrantSSHKey'
+    private_key = '/home/sahil/Learn/dev-ops/vagrant/.vagrant/machines/default/virtualbox/private_key'
   }
   agent any
   stages {
@@ -10,6 +10,7 @@ pipeline {
           sh '''#!/bin/bash
               echo "private_key: ${private_key}"
               echo "vm_ip: ${vm_ip}"
+              cat ${private_key}
               scp -i ${private_key} -r ./public vagrant@${vm_ip}:/home/vagrant/app/
               scp -i ${private_key} ./index.js vagrant@${vm_ip}:/home/vagrant/app/
               scp -i ${private_key} -r ./package.json vagrant@${vm_ip}:/home/vagrant/app/
