@@ -1,7 +1,7 @@
 pipeline {
   environment {
-    vm_ip = '192.168.56.10'
-    private_key = '/home/sahil/Learn/dev-ops/vagrant/.vagrant/machines/default/virtualbox/private_key'
+    vm_ip = "192.168.56.10"
+    private_key = 'VagrantSSHKey'
   }
   agent any
   stages {
